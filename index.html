@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Grade 3 Reviewer Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sky:     #5bc8f5;
+            --sun:     #ffd93d;
+            --grass:   #6bcb77;
+            --coral:   #ff6b6b;
+            --lavender:#c77dff;
+            --peach:   #ffb347;
+            --white:   #fffef9;
+            --ink:     #2b2d42;
+            --card-r:  18px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--sky);
+            min-height: 100vh;
+            padding: 0 0 40px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ── Clouds background ── */
+        body::before, body::after {
+            content: '☁️';
+            position: fixed;
+            font-size: 6rem;
+            opacity: .25;
+            pointer-events: none;
+            animation: drift 18s linear infinite;
+        }
+        body::before { top: 8%; left: -120px; animation-delay: 0s; }
+        body::after  { top: 55%; left: -120px; animation-delay: 9s; font-size: 4rem; }
+        @keyframes drift { to { transform: translateX(110vw); } }
+
+        /* ── SUN ── */
+        .sun {
+            position: fixed;
+            top: -40px; right: -40px;
+            width: 160px; height: 160px;
+            background: var(--sun);
+            border-radius: 50%;
+            box-shadow: 0 0 0 20px rgba(255,217,61,.3), 0 0 0 40px rgba(255,217,61,.15);
+            animation: glow 3s ease-in-out infinite;
+            z-index: 0;
+        }
+        @keyframes glow {
+            0%,100% { box-shadow: 0 0 0 20px rgba(255,217,61,.3), 0 0 0 40px rgba(255,217,61,.15); }
+            50%      { box-shadow: 0 0 0 30px rgba(255,217,61,.4), 0 0 0 60px rgba(255,217,61,.2); }
+        }
+
+        /* ── Grass strip ── */
+        .grass-strip {
+            width: 100%;
+            height: 36px;
+            background: var(--grass);
+            border-top: 5px solid #4caf60;
+            position: relative;
+            overflow: hidden;
+        }
+        .grass-strip::before {
+            content: '🌻🌼🌷🌸🌺🌻🌼🌷🌸🌺🌻🌼🌷🌸🌺';
+            position: absolute;
+            font-size: 1.5rem;
+            bottom: 0;
+            white-space: nowrap;
+            animation: scroll-flowers 20s linear infinite;
+        }
+        @keyframes scroll-flowers { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ── Main card ── */
+        .container {
+            max-width: 680px;
+            margin: 36px auto 0;
+            background: var(--white);
+            border-radius: 30px;
+            box-shadow: 0 12px 0 #3aa8d4, 0 16px 40px rgba(0,0,0,.18);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+        }
+        @keyframes popIn {
+            from { opacity:0; transform: scale(.85) translateY(30px); }
+            to   { opacity:1; transform: scale(1)  translateY(0); }
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(160deg, #ff6b6b 0%, #ff8e53 100%);
+            padding: 36px 28px 28px;
+            text-align: center;
+            position: relative;
+            border-bottom: 6px solid #e85d3f;
+        }
+        .star-row {
+            font-size: 2rem;
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            display: inline-block;
+            animation: starSpin 6s linear infinite;
+        }
+        @keyframes starSpin { 50% { letter-spacing: 14px; } }
+
+        .header h1 {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(1.6rem, 5vw, 2.5rem);
+            color: #fff;
+            text-shadow: 3px 4px 0 #c0392b;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+        .header h2 {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #ffe0b2;
+            text-shadow: 2px 2px 0 rgba(0,0,0,.2);
+            margin-bottom: 10px;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--sun);
+            color: var(--ink);
+            font-size: 1rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 0 #c8971e;
+            margin-top: 4px;
+        }
+
+        /* ── Tap prompt ── */
+        .tap-prompt {
+            background: #fff3e0;
+            border-bottom: 3px dashed #ffcc80;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #e65100;
+        }
+        .tap-prompt span { animation: wiggle 1.4s ease-in-out infinite; display:inline-block; }
+        @keyframes wiggle { 0%,100%{transform:rotate(-8deg);} 50%{transform:rotate(8deg);} }
+
+        /* ── Subject cards ── */
+        .links-container {
+            padding: 28px 24px 32px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .subject-card {
+            border-radius: var(--card-r);
+            border: 4px solid transparent;
+            box-shadow: 0 6px 0 rgba(0,0,0,.12);
+            transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .subject-card:hover, .subject-card:focus-within {
+            transform: translateY(-6px) scale(1.025);
+            box-shadow: 0 12px 0 rgba(0,0,0,.14);
+        }
+        .subject-card:active { transform: translateY(1px) scale(.98); box-shadow: 0 3px 0 rgba(0,0,0,.12); }
+
+        /* Color themes */
+        .card-red    { background: linear-gradient(135deg,#ff8a80,#ff6b6b); border-color:#c0392b; }
+        .card-blue   { background: linear-gradient(135deg,#81d4fa,#4fc3f7); border-color:#0277bd; }
+        .card-green  { background: linear-gradient(135deg,#a5d6a7,#66bb6a); border-color:#2e7d32; }
+        .card-purple { background: linear-gradient(135deg,#ce93d8,#ab47bc); border-color:#6a1b9a; }
+        .card-orange { background: linear-gradient(135deg,#ffcc80,#ffa726); border-color:#e65100; }
+
+        .subject-card a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 22px;
+        }
+
+        .subject-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+            filter: drop-shadow(2px 3px 2px rgba(0,0,0,.2));
+            transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+        }
+        .subject-card:hover .subject-icon { transform: rotate(12deg) scale(1.25); }
+
+        .subject-info { flex: 1; }
+        .subject-name {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 1px 2px 0 rgba(0,0,0,.22);
+            line-height: 1.2;
+        }
+        .subject-desc {
+            font-size: .88rem;
+            font-weight: 700;
+            color: rgba(255,255,255,.82);
+            margin-top: 2px;
+        }
+
+        .go-btn {
+            background: rgba(255,255,255,.3);
+            border: 3px solid rgba(255,255,255,.7);
+            border-radius: 50px;
+            color: #fff;
+            font-family: 'Baloo 2', cursive;
+            font-size: 1rem;
+            font-weight: 800;
+            padding: 8px 18px;
+            white-space: nowrap;
+            transition: background .2s;
+            flex-shrink: 0;
+        }
+        .subject-card:hover .go-btn { background: rgba(255,255,255,.55); }
+
+        /* ── Footer ── */
+        .footer {
+            background: linear-gradient(135deg, var(--grass), #43a857);
+            padding: 16px 24px;
+            text-align: center;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-shadow: 1px 1px 0 rgba(0,0,0,.2);
+            border-top: 5px solid #388e3c;
+        }
+        .footer-icons { font-size: 1.5rem; display:block; margin-bottom:4px; }
+
+        /* ── Responsive ── */
+        @media (max-width:480px) {
+            .container { margin: 16px 12px 0; }
+            .subject-name { font-size: 1.1rem; }
+            .subject-icon { font-size: 2.2rem; }
+            .go-btn { padding: 7px 13px; font-size: .9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sun"></div>
+    <div class="grass-strip"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="star-row">⭐🌟⭐🌟⭐</div>
+            <h1>Bible Review<br>Old & New Testament</h1>
+            <h2>for Students </h2>
+            <span class="badge">📚 Your Exam Hub!</span>
+        </div>
+
+        <div class="tap-prompt">
+            <span>👆</span>Select to start!
+        </div>
+
+        <div class="links-container">
+
+            <div class="subject-card card-red">
+                <a href="https://rekzbanz02-arch.github.io/Review-Old-Testament/" target="_blank" rel="noopener noreferrer">
+                    <span class="subject-icon">📜</span>
+                    <div class="subject-info">
+                        <div class="subject-name">Old Testament</div>
+                       <!-- div class="subject-desc">Reading Story</div -->
+                    </div>
+                    <span class="go-btn">Go! →</span>
+                </a>
+            </div>
+
+            <div class="subject-card card-blue">
+                <a href="https://rekzbanz02-arch.github.io/Review-New-Testament/" target="_blank" rel="noopener noreferrer">
+                    <span class="subject-icon">✝️</span>
+                    <div class="subject-info">
+                        <div class="subject-name">New Testament</div>
+                        <!-- div class="subject-desc">Reading Story</div -->
+                    </div>
+                    <span class="go-btn">Go! →</span>
+                </a>
+            </div>
+
+            <!-- div class="subject-card card-green">
+                <a href="https://rekzbanz02-arch.github.io/division-by-6-and-7/" target="_blank" rel="noopener noreferrer">
+                    <span class="subject-icon">➗</span>
+                    <div class="subject-info">
+                        <div class="subject-name">Division by 6 &amp; 7</div>
+                        <div class="subject-desc">Math Practice</div>
+                    </div>
+                    <span class="go-btn">Go! →</span>
+                </a>
+            </div -->
+
+        </div>
+
+        <div class="footer">
+            <span class="footer-icons">🌟 💡 🌟</span>
+            
+            <!-- =========MESSENGER LINK========== -->
+            <a href="https://m.me/j/AbbKMGya19akJm6v/"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Contact support via Messenger"
+         style="
+           display:inline-flex; align-items:center; gap:6px;
+           padding:7px 14px; border-radius:100px;
+           background:linear-gradient(135deg,#0084ff,#0066cc);
+           color:#fff; font-family:var(--font-body);
+           font-size:.76rem; font-weight:700;
+           text-decoration:none; letter-spacing:.2px;
+           box-shadow:0 2px 8px rgba(0,102,204,.28);
+           transition:transform .2s, box-shadow .2s;
+         "
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(0,102,204,.4)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,102,204,.28)'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.908 1.438 5.504 3.688 7.2V22l3.37-1.85c.9.25 1.853.386 2.942.386 5.523 0 10-4.145 10-9.243C22 6.145 17.523 2 12 2zm1.007 12.44l-2.55-2.72-4.976 2.72 5.474-5.81 2.613 2.72 4.913-2.72-5.474 5.81z"/>
+        </svg>
+        Message Us on Messenger
+      </a>
+      <!-- =========END OF MESSENGER LINK========== -->
+        </div>
+    </div>
+</body>
+</html>
